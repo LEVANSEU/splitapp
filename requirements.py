@@ -181,7 +181,7 @@ if report_file and statement_files:
             with col2:
                 if st.button(str(item[1]), key=f"missing_{item[1]}"):
                     st.session_state['selected_missing_company'] = item[1]  # Save selected company ID
-                    st.experimental_rerun()  # Rerun to show details
+                    st.write(f"Selected company ID: {item[1]}")  # Debug
             with col3:
                 st.write(f"{item[2]:,.2f}")
             with col4:
@@ -189,17 +189,17 @@ if report_file and statement_files:
             with col5:
                 st.write(f"{item[4]:,.2f}")
 
-        # Detail view for selected missing company
+        # Detail view for selected missing company using st.dataframe
         if 'selected_missing_company' in st.session_state:
             selected_id = st.session_state['selected_missing_company']
             st.subheader(f"ჩარიცხვების ცხრილი - {selected_id}")
             matching_transactions = bank_df[bank_df['P'] == str(selected_id)]
             if not matching_transactions.empty:
-                st.dataframe(matching_transactions[['Name', 'P', 'Amount']], use_container_width=True)  # Use dataframe for better formatting
+                st.dataframe(matching_transactions, use_container_width=True)  # Use dataframe for better formatting
             else:
                 st.warning("ჩანაწერი არ მოიძებნა ამ კომპანიისთვის.")
             if st.button("⬅️ დაბრუნება სრულ სიაზე"):
                 del st.session_state['selected_missing_company']
-                st.experimental_rerun()
+                st.experimental_rerun()  # Rerun without full app restart
     else:
         st.warning("გთხოვთ, ატვირთეთ ორივე ფაილი.")
