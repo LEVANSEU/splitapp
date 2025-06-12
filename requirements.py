@@ -185,6 +185,7 @@ if report_file and statement_files:
             with col2:
                 if st.button(f"{company_id}", key=f"id_{company_id}"):
                     st.session_state['selected_company'] = company_id
+                    st.write(f"Selected company: {company_id}")  # Debug
             with col3:
                 st.markdown(f"<div class='number-cell'>{invoice_sum:,.2f}</div>", unsafe_allow_html=True)
             with col4:
@@ -250,7 +251,7 @@ if report_file and statement_files:
                     with col2:
                         if st.button(str(item[1]), key=f"missing_{item[1]}"):
                             st.session_state['selected_missing_company'] = item[1]  # Save selected company ID
-                            st.experimental_rerun()  # Rerun to show details
+                            st.write(f"Selected missing company: {item[1]}")  # Debug
                     with col3:
                         st.write(f"{item[2]:,.2f}")
                     with col4:
