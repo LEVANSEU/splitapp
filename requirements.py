@@ -195,7 +195,7 @@ if report_file and statement_files:
             st.subheader(f"ჩარიცხვების ცხრილი - {selected_id}")
             matching_transactions = bank_df[bank_df['P'] == str(selected_id)]
             if not matching_transactions.empty:
-                st.table(matching_transactions[['Name', 'P', 'Amount']])  # Display transactions table
+                st.dataframe(matching_transactions[['Name', 'P', 'Amount']], use_container_width=True)  # Use dataframe for better formatting
             else:
                 st.warning("ჩანაწერი არ მოიძებნა ამ კომპანიისთვის.")
             if st.button("⬅️ დაბრუნება სრულ სიაზე"):
